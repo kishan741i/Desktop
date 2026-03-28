@@ -21,7 +21,92 @@
             --danger: #ef4444;  
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* --- Maintenance Screen Style --- */
+        #maintenance-screen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(11, 14, 20, 0.98);
+            backdrop-filter: blur(25px);
+            z-index: 9999;
+            display: none; 
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--text-main);
+        }
+
+        .m-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 50px;
+            border-radius: 40px;
+            box-shadow: 0 0 50px var(--accent-glow);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .m-card i { font-size: 3.5rem; color: var(--accent); margin-bottom: 25px; animation: spin 4s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        #countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+            font-family: 'Outfit';
+        }
+
+        .timer-unit {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 15px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            min-width: 75px;
+        }
+
+        .timer-unit span { display: block; font-size: 1.5rem; font-weight: 800; color: var(--accent); }
+        .timer-unit label { font-size: 0.6rem; text-transform: uppercase; color: var(--text-dim); }
+
+        /* --- Maintenance Notice Banner Style --- */
+        .maintenance-notice {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- Original Styles Restore --- */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-deep);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(transparent, var(--accent), transparent);
+            border-radius: 20px;
+            border: 2px solid var(--bg-deep);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) var(--bg-deep);
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
 
         body {
             background-color: var(--bg-deep);
@@ -136,7 +221,6 @@
         .project-item h3 { font-family: 'Outfit', sans-serif; font-size: 1.2rem; color: var(--accent); }
         .project-item p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 10px; }
 
-        /* --- Pulse Effect --- */
         .pulse-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
         .red-dot { background: var(--danger); box-shadow: 0 0 8px var(--danger); animation: pulse-red-orig 2s infinite; }
         .green-dot { background: var(--success); box-shadow: 0 0 8px var(--success); animation: pulse-green-orig 2s infinite; }
@@ -158,7 +242,46 @@
         .news-item h4 { font-size: 0.85rem; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
         .news-item p { font-size: 0.75rem; color: var(--text-dim); }
 
-        /* --- Library Styles --- */
+        .marquee-container {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+            mask-image: linear-gradient(transparent, black 15%, black 85%, transparent);
+        }
+
+        .marquee-content {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            animation: scroll-up 18s linear infinite;
+        }
+
+        .quick-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+
+        .quick-link span { color: var(--text-dim); font-size: 0.7rem; margin-left: auto; font-style: italic; }
+
+        .quick-link:hover {
+            border-color: var(--accent);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        @keyframes scroll-up {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+
         .library-item { margin-bottom: 15px; }
         .library-item p { font-size: 0.75rem; color: var(--text-dim); margin-top: 5px; margin-left: 5px; }
 
@@ -167,7 +290,7 @@
         .btn-outline:hover { background: var(--glass); border-color: var(--accent); }
         .btn-primary { background: var(--accent); color: white; width: 100%; max-width: 240px; box-shadow: 0 4px 15px var(--accent-glow); padding: 10px; border-radius: 12px; text-decoration: none; display: inline-flex; justify-content: center; align-items: center; gap: 10px; font-size: 0.8rem; font-weight: 600; }
 
-        footer {
+        footer {    
             padding: 60px 20px 40px;
             text-align: center;
             opacity: 0.6;
@@ -181,6 +304,19 @@
     </style>
 </head>
 <body>
+
+    <div id="maintenance-screen">
+        <div class="m-card">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+            <h1 style="font-family: 'Outfit';">SYSTEM MAINTENANCE</h1>
+            <p style="color: var(--text-dim); margin-top: 10px;">Maintenance is live every Sunday from 9 AM to 5 PM.</p>
+            <div id="countdown-timer">
+                <div class="timer-unit"><span id="hours">00</span><label>Hours</label></div>
+                <div class="timer-unit"><span id="mins">00</span><label>Mins</label></div>
+                <div class="timer-unit"><span id="secs">00</span><label>Secs</label></div>
+            </div>
+        </div>
+    </div>
 
     <header>
         <div class="logo">CLOUD 9</div>
@@ -196,6 +332,12 @@
 
     <div class="container">
         <main class="main-content">
+
+            <div class="maintenance-notice">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span>SCHEDULED MAINTENANCE: EVERY SUNDAY 9:00 AM TO 5:00 PM</span>
+            </div>
+
             <section class="card">
                 <h2 style="font-family: 'Outfit'; letter-spacing: 1px; margin-bottom: 25px;">REPOSITORY FEEDS</h2>
                 <div class="project-grid">
@@ -262,9 +404,56 @@
             </section>
 
             <section class="card">
+                <h3 style="font-family: 'Outfit'; margin-bottom: 20px; font-size: 0.9rem; color: var(--text-dim); letter-spacing: 1px;">QUICK LINKS</h3>
+                <div class="marquee-container">
+                    <div class="marquee-content">
+                        <a href="https://overapi.com/" target="_blank" class="quick-link">
+                            <i class="fa-solid fa-file-code"></i> OverAPI <span>cheat sheets</span>
+                        </a>
+                        <a href="https://staying.fun/" target="_blank" class="quick-link">
+                            <i class="fa-solid fa-eye"></i> Staying Fun <span>code visualization</span>
+                        </a>
+                        <a href="https://example.com/portal" target="_blank" class="quick-link">
+                            <i class="fa-solid fa-user-shield"></i> Portal <span>student login</span>
+                        </a>
+                        <a href="https://example.com/exam" target="_blank" class="quick-link">
+                            <i class="fa-solid fa-calendar-check"></i> Exams <span>date sheets</span>
+                        </a>
+                        <a href="https://example.com/result" target="_blank" class="quick-link">
+                            <i class="fa-solid fa-award"></i> Results <span>score cards</span>
+                        </a>
+
+                        <a href="https://overapi.com/" target="_blank" class="quick-link">
+                            <i class="fa-solid fa-file-code"></i> OverAPI <span>cheat sheets</span>
+                        </a>
+                        <a href="https://staying.fun/" target="_blank" class="quick-link">
+                            <i class="fa-solid fa-eye"></i> Staying Fun <span>code visualization</span>
+                        </a>
+                        <a href="https://example.com/portal" target="_blank" class="quick-link">
+                            <i class="fa-solid fa-user-shield"></i> Portal <span>student login</span>
+                        </a>
+                        <a href="https://example.com/exam" target="_blank" class="quick-link">
+                            <i class="fa-solid fa-calendar-check"></i> Exams <span>date sheets</span>
+                        </a>
+                        <a href="https://example.com/result" target="_blank" class="quick-link">
+                            <i class="fa-solid fa-award"></i> Results <span>score cards</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
                 <h3 style="font-family: 'Outfit'; margin-bottom: 20px; font-size: 0.9rem; color: var(--text-dim); letter-spacing: 1px;">LATEST UPDATES</h3>
                 <div class="news-feed">
-                    <div class="news-item">
+                 <div class="news-item">
+                    <h4><span class="pulse-dot red-dot"></span>Maintenance System</h4>
+                    <p>Added system for update contents. 28 March 2026</p>
+                </div>
+                 <div class="news-item">
+                    <h4><span class="pulse-dot red-dot"></span>Quick Links</h4>
+                    <p>Useful website with clickable links for learning. 28 March 2026</p>
+                </div>
+                 <div class="news-item">
                         <h4><span class="pulse-dot red-dot"></span>PYQs</h4>
                         <p>Semester 6 final exam PDF updated in E-library. 28 March 2026</p>
                     </div>
@@ -297,6 +486,36 @@
 
     <script>
         function openInDrive(id) { window.open(`https://drive.google.com/open?id=${id}`, '_blank'); }
+
+        // Maintenance Logic (Updated to 9 AM - 5 PM)
+        function checkMaintenance() {
+            const now = new Date();
+            const day = now.getDay(); // 0 = Sunday
+            const hours = now.getHours();
+
+            // Sunday AND Time between 9 AM (9:00) and 5 PM (17:00)
+            if (day === 6 && hours >= 9 && hours < 17) {
+                document.getElementById('maintenance-screen').style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+
+                const target = new Date();
+                target.setHours(17, 0, 0, 0); // Countdown until 5 PM
+                const diff = target - now;
+
+                const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const m = Math.floor((diff / (1000 * 60)) % 60);
+                const s = Math.floor((diff / 1000) % 60);
+
+                document.getElementById('hours').innerText = String(h).padStart(2, '0');
+                document.getElementById('mins').innerText = String(m).padStart(2, '0');
+                document.getElementById('secs').innerText = String(s).padStart(2, '0');
+            } else {
+                document.getElementById('maintenance-screen').style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+        setInterval(checkMaintenance, 1000);
+        checkMaintenance();
     </script>
 </body>
 </html>
