@@ -485,61 +485,37 @@
     </footer>
 
     <script>
+        function openInDrive(id) { window.open(`https://drive.google.com/open?id=${id}`, '_blank'); }
 
-function openInDrive(id) { 
-    window.open(`https://drive.google.com/open?id=${id}`, '_blank'); 
-}
+        // Maintenance Logic (Updated to 9 AM - 5 PM)
+        function checkMaintenance() {
+            const now = new Date();
+            const day = now.getDay(); // 0 = Sunday
+            const hours = now.getHours();
 
-// ---- Obfuscated Secret Key ----
-const _0xk = atob("U05BUFBZX0FETUlOX0FDQ0VTU18yMDI2X1NFQ1JFVA=="); 
-// original key = SNAPPY_ADMIN_ACCESS_2026_SECRET
+            // Sunday AND Time between 9 AM (9:00) and 5 PM (17:00)
+            if (day === 0 && hours >= 9 && hours < 17) {
+                document.getElementById('maintenance-screen').style.display = 'flex';
+                document.body.style.overflow = 'hidden';
 
-function checkMaintenance() {
+                const target = new Date();
+                target.setHours(17, 0, 0, 0); // Countdown until 5 PM
+                const diff = target - now;
 
-    const params = new URLSearchParams(window.location.search);
-    const adminKey = params.get("access");
+                const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const m = Math.floor((diff / (1000 * 60)) % 60);
+                const s = Math.floor((diff / 1000) % 60);
 
-    // ---- Admin Bypass ----
-    if(adminKey === _0xk){
-        document.getElementById('maintenance-screen').style.display = 'none';
-        document.body.style.overflow = 'auto';
-        return;
-    }
-
-    const now = new Date();
-    const day = now.getDay(); 
-    const hours = now.getHours();
-
-    // Sunday 4 PM – 6 PM
-    if (day === 0 && hours >= 16 && hours < 18) {
-
-        document.getElementById('maintenance-screen').style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-
-        const target = new Date();
-        target.setHours(18, 0, 0, 0);
-
-        const diff = target - now;
-
-        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const m = Math.floor((diff / (1000 * 60)) % 60);
-        const s = Math.floor((diff / 1000) % 60);
-
-        document.getElementById('hours').innerText = String(h).padStart(2,'0');
-        document.getElementById('mins').innerText = String(m).padStart(2,'0');
-        document.getElementById('secs').innerText = String(s).padStart(2,'0');
-
-    } else {
-
-        document.getElementById('maintenance-screen').style.display = 'none';
-        document.body.style.overflow = 'auto';
-
-    }
-}
-
-setInterval(checkMaintenance,1000);
-checkMaintenance();
-
+                document.getElementById('hours').innerText = String(h).padStart(2, '0');
+                document.getElementById('mins').innerText = String(m).padStart(2, '0');
+                document.getElementById('secs').innerText = String(s).padStart(2, '0');
+            } else {
+                document.getElementById('maintenance-screen').style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+        setInterval(checkMaintenance, 1000);
+        checkMaintenance();
     </script>
 </body>
 </html>
