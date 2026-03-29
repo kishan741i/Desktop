@@ -494,7 +494,7 @@
             const hours = now.getHours();
 
             // Sunday AND Time between 9 AM (9:00) and 5 PM (17:00)
-            if (day === 6 && hours >= 9 && hours < 17) {
+            if (day === 0 && hours >= 9 && hours < 17) {
                 document.getElementById('maintenance-screen').style.display = 'flex';
                 document.body.style.overflow = 'hidden';
 
