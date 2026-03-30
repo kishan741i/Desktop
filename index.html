@@ -43,8 +43,8 @@
             padding: 50px;
             border-radius: 40px;
             box-shadow: 0 0 50px var(--accent-glow);
-            max-width: 500px;
-            width: 90%;
+            max-width: 600px;
+            width: 95%;
         }
 
         .m-card i { font-size: 3.5rem; color: var(--accent); margin-bottom: 25px; animation: spin 4s linear infinite; }
@@ -53,21 +53,21 @@
         #countdown-timer {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
             margin-top: 25px;
             font-family: 'Outfit';
         }
 
         .timer-unit {
             background: rgba(255, 255, 255, 0.05);
-            padding: 10px 15px;
+            padding: 12px 10px;
             border-radius: 12px;
             border: 1px solid var(--glass-border);
-            min-width: 75px;
+            min-width: 80px;
         }
 
-        .timer-unit span { display: block; font-size: 1.5rem; font-weight: 800; color: var(--accent); }
-        .timer-unit label { font-size: 0.6rem; text-transform: uppercase; color: var(--text-dim); }
+        .timer-unit span { display: block; font-size: 1.6rem; font-weight: 800; color: var(--accent); }
+        .timer-unit label { font-size: 0.65rem; text-transform: uppercase; color: var(--text-dim); font-weight: 600; }
 
         /* --- Maintenance Notice Banner Style --- */
         .maintenance-notice {
@@ -308,9 +308,10 @@
     <div id="maintenance-screen">
         <div class="m-card">
             <i class="fa-solid fa-screwdriver-wrench"></i>
-            <h1 style="font-family: 'Outfit';">SERVER ERROR</h1>
-            <p style="color: var(--text-dim); margin-top: 10px;">Start every Sunday for 24 hours.</p>
+            <h1 style="font-family: 'Outfit';">SYSTEM MAINTENANCE</h1>
+            <p style="color: var(--text-dim); margin-top: 10px;">Portal access is limited to Sundays.<br>Next session begins in:</p>
             <div id="countdown-timer">
+                <div class="timer-unit"><span id="days">00</span><label>Days</label></div>
                 <div class="timer-unit"><span id="hours">00</span><label>Hours</label></div>
                 <div class="timer-unit"><span id="mins">00</span><label>Mins</label></div>
                 <div class="timer-unit"><span id="secs">00</span><label>Secs</label></div>
@@ -335,7 +336,7 @@
 
             <div class="maintenance-notice">
                 <i class="fa-solid fa-circle-exclamation"></i>
-                <span>SCHEDULED MAINTENANCE: EVERY SUNDAY 9:00 AM TO 5:00 PM</span>
+                <span>This website id Dead, No longer available.</span>
             </div>
 
             <section class="card">
@@ -490,40 +491,60 @@
     </footer>
 
     <script>
-        function openInDrive(id) { window.open(`https://drive.google.com/open?id=${id}`, '_blank'); }
+    function openInDrive(id) { window.open(`https://drive.google.com/open?id=${id}`, '_blank'); }
 
-        function checkMaintenance() {
-            const now = new Date();
-            const day = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+    // Obfuscated Admin Bypass Logic
+    let adminMode = false;
+    
+    (function(_0xsys, _0xdev) {
+        const _0xkey = new URLSearchParams(window.location.search);
+        // The encoded version of your secret key
+        const _0xauth = "T1BFTl9BRE1JTl9BQ0NFU1NfRk9SX0tJU0hBTl9NT0tBUklZQQ=="; 
         
-            // NAYA LOGIC: Agar din Sunday (0) nahi hai, to maintenance dikhao
-            if (day !== 0) {
-                document.getElementById('maintenance-screen').style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-        
-                // Countdown logic: Next Sunday 00:00:00 tak ka time
-                const nextSunday = new Date();
-                nextSunday.setDate(now.getDate() + (7 - day) % 7);
-                nextSunday.setHours(0, 0, 0, 0);
-        
-                const diff = nextSunday - now;
-        
-                const h = Math.floor((diff / (1000 * 60 * 60)));
-                const m = Math.floor((diff / (1000 * 60)) % 60);
-                const s = Math.floor((diff / 1000) % 60);
-        
-                // Hours ko display karne ke liye (agar 24 se zyada hain to bhi dikhayega)
-                document.getElementById('hours').innerText = String(h).padStart(2, '0');
-                document.getElementById('mins').innerText = String(m).padStart(2, '0');
-                document.getElementById('secs').innerText = String(s).padStart(2, '0');
-            } else {
-                // Sunday ko site open rahegi
-                document.getElementById('maintenance-screen').style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
+        // Decoding check to verify access without showing the raw string
+        if (_0xkey.get('access') && btoa(_0xkey.get('access')) === _0xauth) {
+            adminMode = true;
+            console.log("System: Dev_Access_Granted");
         }
-        setInterval(checkMaintenance, 1000);
-        checkMaintenance();
-    </script>
+    })();
+
+    function checkMaintenance() {
+        if (adminMode) {
+            document.getElementById('maintenance-screen').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            return;
+        }
+
+        const now = new Date();
+        const day = now.getDay(); 
+
+        if (day !== 0) { // Lock Monday-Saturday
+            document.getElementById('maintenance-screen').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+
+            const target = new Date();
+            target.setDate(now.getDate() + (7 - day));
+            target.setHours(0, 0, 0, 0);
+
+            const diff = target - now;
+
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const m = Math.floor((diff / (1000 * 60)) % 60);
+            const s = Math.floor((diff / 1000) % 60);
+
+            if(document.getElementById('days')) document.getElementById('days').innerText = String(d).padStart(2, '0');
+            document.getElementById('hours').innerText = String(h).padStart(2, '0');
+            document.getElementById('mins').innerText = String(m).padStart(2, '0');
+            document.getElementById('secs').innerText = String(s).padStart(2, '0');
+        } else {
+            document.getElementById('maintenance-screen').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    setInterval(checkMaintenance, 1000);
+    checkMaintenance();
+</script>
 </body>
 </html>
