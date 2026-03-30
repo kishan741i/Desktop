@@ -491,60 +491,54 @@
     </footer>
 
     <script>
-    function openInDrive(id) { window.open(`https://drive.google.com/open?id=${id}`, '_blank'); }
-
-    // Obfuscated Admin Bypass Logic
-    let adminMode = false;
-    
-    (function(_0xsys, _0xdev) {
-        const _0xkey = new URLSearchParams(window.location.search);
-        // The encoded version of your secret key
-        const _0xauth = "T1BFTl9BRE1JTl9BQ0NFU1NfRk9SX0tJU0hBTl9NT0tBUklZQQ=="; 
+        function openInDrive(id) { 
+            window.open(`https://drive.google.com/open?id=${id}`, '_blank'); 
+        }
         
-        // Decoding check to verify access without showing the raw string
-        if (_0xkey.get('access') && btoa(_0xkey.get('access')) === _0xauth) {
-            adminMode = true;
-            console.log("System: Dev_Access_Granted");
-        }
-    })();
-
-    function checkMaintenance() {
-        if (adminMode) {
-            document.getElementById('maintenance-screen').style.display = 'none';
-            document.body.style.overflow = 'auto';
-            return;
-        }
-
-        const now = new Date();
-        const day = now.getDay(); 
-
-        if (day !== 0) { // Lock Monday-Saturday
-            document.getElementById('maintenance-screen').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-
-            const target = new Date();
-            target.setDate(now.getDate() + (7 - day));
-            target.setHours(0, 0, 0, 0);
-
-            const diff = target - now;
-
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const m = Math.floor((diff / (1000 * 60)) % 60);
-            const s = Math.floor((diff / 1000) % 60);
-
-            if(document.getElementById('days')) document.getElementById('days').innerText = String(d).padStart(2, '0');
-            document.getElementById('hours').innerText = String(h).padStart(2, '0');
-            document.getElementById('mins').innerText = String(m).padStart(2, '0');
-            document.getElementById('secs').innerText = String(s).padStart(2, '0');
-        } else {
-            document.getElementById('maintenance-screen').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-    }
-
-    setInterval(checkMaintenance, 1000);
-    checkMaintenance();
-</script>
+        const _0xk = atob("U05BUFBZX0FETUlOX0FDQ0VTU18yMDI2X1NFQ1JFVA==");
+        
+        function checkMaintenance() {
+        
+            const params = new URLSearchParams(window.location.search);
+            const adminKey = params.get("access");
+        
+            // Admin Bypass 
+            if(adminKey === _0xk){
+                document.getElementById('maintenance-screen').style.display = 'none';
+                document.body.style.overflow = 'auto';
+                return;
+            }
+        
+            const now = new Date();
+            const day = now.getDay(); 
+        
+                if (day !== 0) { // Lock Monday-Saturday
+                    document.getElementById('maintenance-screen').style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+        
+                    const target = new Date();
+                    target.setDate(now.getDate() + (7 - day));
+                    target.setHours(0, 0, 0, 0);
+        
+                    const diff = target - now;
+        
+                    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                    const m = Math.floor((diff / (1000 * 60)) % 60);
+                    const s = Math.floor((diff / 1000) % 60);
+        
+                    if(document.getElementById('days')) document.getElementById('days').innerText = String(d).padStart(2, '0');
+                    document.getElementById('hours').innerText = String(h).padStart(2, '0');
+                    document.getElementById('mins').innerText = String(m).padStart(2, '0');
+                    document.getElementById('secs').innerText = String(s).padStart(2, '0');
+                } else {
+                    document.getElementById('maintenance-screen').style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        
+            setInterval(checkMaintenance, 1000);
+            checkMaintenance();
+        </script>
 </body>
 </html>
