@@ -6,8 +6,6 @@
     <title>Cloud 9 | Digital</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
-
     <style>
         :root {
             --accent: #6366f1;
@@ -19,6 +17,8 @@
             --text-dim: #94a3b8;
             --success: #22c55e; 
             --danger: #ef4444;  
+            /* System Native Font Stack */
+            --system-fonts: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
         }
 
         /* --- Maintenance Screen Style --- */
@@ -35,6 +35,7 @@
             align-items: center;
             text-align: center;
             color: var(--text-main);
+            font-family: var(--system-fonts);
         }
 
         .m-card {
@@ -55,7 +56,7 @@
             justify-content: center;
             gap: 12px;
             margin-top: 25px;
-            font-family: 'Outfit';
+            font-family: var(--system-fonts);
         }
 
         .timer-unit {
@@ -82,26 +83,16 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--system-fonts);
             letter-spacing: 0.5px;
         }
 
-        /* --- Original Styles Restore --- */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-deep);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(transparent, var(--accent), transparent);
-            border-radius: 20px;
-            border: 2px solid var(--bg-deep);
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent);
-            box-shadow: 0 0 10px var(--accent-glow);
-        }
+        /* --- Scrollbar Styles --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(transparent, var(--accent), transparent); border-radius: 20px; border: 2px solid var(--bg-deep); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
+        
         * {
             scrollbar-width: thin;
             scrollbar-color: var(--accent) var(--bg-deep);
@@ -111,12 +102,13 @@
         body {
             background-color: var(--bg-deep);
             color: var(--text-main);
-            font-family: 'Inter', sans-serif;
+            font-family: var(--system-fonts);
             min-height: 100vh;
             padding-top: 130px;
             background-image: 
                 radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.15) 0%, transparent 35%),
                 radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.1) 0%, transparent 35%);
+            -webkit-font-smoothing: antialiased;
         }
 
         header {
@@ -148,12 +140,13 @@
             color: var(--text-dim);
             z-index: 999;
             backdrop-filter: blur(5px);
+            font-family: var(--system-fonts);
         }
         .stat-item i { color: var(--accent); margin-right: 6px; }
         .stat-divider { width: 1px; height: 15px; background: var(--glass-border); }
 
         .logo {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--system-fonts);
             font-weight: 800;
             font-size: 2rem;
             letter-spacing: 4px;
@@ -185,12 +178,7 @@
             margin-bottom: 25px;
         }
 
-        .tech-stack {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
+        .tech-stack { display: flex; gap: 6px; margin-bottom: 15px; flex-wrap: wrap; }
         .tech-tag {
             font-size: 0.6rem;
             padding: 3px 8px;
@@ -200,14 +188,10 @@
             color: #fff;
             font-weight: 600;
             text-transform: uppercase;
+            font-family: var(--system-fonts);
         }
 
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .project-item {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--glass-border);
@@ -218,7 +202,7 @@
             gap: 12px; 
         }
 
-        .project-item h3 { font-family: 'Outfit', sans-serif; font-size: 1.2rem; color: var(--accent); }
+        .project-item h3 { font-family: var(--system-fonts); font-size: 1.2rem; color: var(--accent); font-weight: 700; }
         .project-item p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 10px; }
 
         .pulse-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
@@ -239,7 +223,7 @@
 
         .news-feed { display: flex; flex-direction: column; gap: 15px; }
         .news-item { padding: 12px; border-left: 2px solid var(--glass-border); transition: 0.3s; }
-        .news-item h4 { font-size: 0.85rem; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+        .news-item h4 { font-size: 0.85rem; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; font-weight: 700; }
         .news-item p { font-size: 0.75rem; color: var(--text-dim); }
 
         .marquee-container {
@@ -249,12 +233,7 @@
             mask-image: linear-gradient(transparent, black 15%, black 85%, transparent);
         }
 
-        .marquee-content {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            animation: scroll-up 18s linear infinite;
-        }
+        .marquee-content { display: flex; flex-direction: column; gap: 12px; animation: scroll-up 18s linear infinite; }
 
         .quick-link {
             display: flex;
@@ -268,27 +247,21 @@
             color: var(--text-main);
             font-size: 0.8rem;
             transition: 0.3s;
+            font-family: var(--system-fonts);
         }
 
         .quick-link span { color: var(--text-dim); font-size: 0.7rem; margin-left: auto; font-style: italic; }
+        .quick-link:hover { border-color: var(--accent); background: rgba(99, 102, 241, 0.1); }
 
-        .quick-link:hover {
-            border-color: var(--accent);
-            background: rgba(99, 102, 241, 0.1);
-        }
-
-        @keyframes scroll-up {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-50%); }
-        }
+        @keyframes scroll-up { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
 
         .library-item { margin-bottom: 15px; }
         .library-item p { font-size: 0.75rem; color: var(--text-dim); margin-top: 5px; margin-left: 5px; }
 
         .btn-group { display: flex; flex-direction: column; gap: 10px; width: 100%; align-items: center; }
-        .btn-outline { background: transparent; border: 1px solid var(--glass-border); color: var(--text-main); width: 100%; max-width: 100%; display: flex; align-items: center; justify-content: flex-start; gap: 10px; padding: 10px 15px; border-radius: 12px; transition: 0.3s; cursor: pointer; text-decoration: none; font-family: 'Outfit', sans-serif; font-size: 0.8rem; }
+        .btn-outline { background: transparent; border: 1px solid var(--glass-border); color: var(--text-main); width: 100%; max-width: 100%; display: flex; align-items: center; justify-content: flex-start; gap: 10px; padding: 10px 15px; border-radius: 12px; transition: 0.3s; cursor: pointer; text-decoration: none; font-family: var(--system-fonts); font-size: 0.8rem; font-weight: 600; }
         .btn-outline:hover { background: var(--glass); border-color: var(--accent); }
-        .btn-primary { background: var(--accent); color: white; width: 100%; max-width: 240px; box-shadow: 0 4px 15px var(--accent-glow); padding: 10px; border-radius: 12px; text-decoration: none; display: inline-flex; justify-content: center; align-items: center; gap: 10px; font-size: 0.8rem; font-weight: 600; }
+        .btn-primary { background: var(--accent); color: white; width: 100%; max-width: 240px; box-shadow: 0 4px 15px var(--accent-glow); padding: 10px; border-radius: 12px; text-decoration: none; display: inline-flex; justify-content: center; align-items: center; gap: 10px; font-size: 0.8rem; font-weight: 700; font-family: var(--system-fonts); }
 
         footer {    
             padding: 60px 20px 40px;
@@ -298,6 +271,7 @@
             color: var(--text-dim);
             letter-spacing: 0.8px;
             text-transform: lowercase;
+            font-family: var(--system-fonts);
         }
 
         @media (max-width: 992px) { .container { grid-template-columns: 1fr; } body { padding-top: 150px; } }
@@ -308,7 +282,7 @@
     <div id="maintenance-screen">
         <div class="m-card">
             <i class="fa-solid fa-screwdriver-wrench"></i>
-            <h1 style="font-family: 'Outfit';">SYSTEM MAINTENANCE</h1>
+            <h1 style="font-weight: 800;">SYSTEM MAINTENANCE</h1>
             <p style="color: var(--text-dim); margin-top: 10px;">Portal access is limited to Sundays.<br>Next session begins in:</p>
             <div id="countdown-timer">
                 <div class="timer-unit"><span id="days">00</span><label>Days</label></div>
@@ -333,16 +307,14 @@
 
     <div class="container">
         <main class="main-content">
-
             <div class="maintenance-notice">
                 <i class="fa-solid fa-circle-exclamation"></i>
-                <span>This website id Dead, No longer available.</span>
+                <span>This website is Dead, No longer available.</span>
             </div>
 
             <section class="card">
-                <h2 style="font-family: 'Outfit'; letter-spacing: 1px; margin-bottom: 25px;">REPOSITORY FEEDS</h2>
+                <h2 style="font-weight: 800; letter-spacing: 1px; margin-bottom: 25px; text-transform: uppercase;">REPOSITORY FEEDS</h2>
                 <div class="project-grid">
-                    
                     <div class="project-item">
                         <div class="tech-stack">
                             <span class="tech-tag">HTML5</span><span class="tech-tag">CSS3</span><span class="tech-tag">JS</span>
@@ -376,14 +348,13 @@
                             <a href="https://github.com/kishan741i/news-site" target="_blank" class="btn-outline" style="justify-content:center;"><i class="fa-brands fa-github"></i> Repository</a>
                         </div>
                     </div>
-
                 </div>
             </section>
         </main>
 
         <aside class="sidebar">
             <section class="card">
-                <h3 style="font-family: 'Outfit'; margin-bottom: 25px; font-size: 0.9rem; color: var(--text-dim); letter-spacing: 1px; text-align: left;">E-LIBRARY</h3>
+                <h3 style="margin-bottom: 25px; font-size: 0.9rem; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase;">E-LIBRARY</h3>
                 <div class="news-feed">
                     <div class="library-item">
                         <button onclick="openInDrive('1wZYNzzs49yKQ8ybYzpvS7Uw8noiIRu1z')" class="btn-outline"><i class="fa-solid fa-bullhorn" style="color:var(--accent)"></i> Notice Board</button>
@@ -405,81 +376,61 @@
             </section>
 
             <section class="card">
-                <h3 style="font-family: 'Outfit'; margin-bottom: 20px; font-size: 0.9rem; color: var(--text-dim); letter-spacing: 1px;">QUICK LINKS</h3>
+                <h3 style="margin-bottom: 20px; font-size: 0.9rem; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase;">QUICK LINKS</h3>
                 <div class="marquee-container">
                     <div class="marquee-content">
-                        <a href="https://aspdotnethelp.com/" target="_blank" class="quick-link">
-                            <i class="fa-solid fa-globe"></i> ASP.NET Help <span>.NET solutions</span>
-                        </a>
-                        <a href="https://developer.mozilla.org/en-US/" target="_blank" class="quick-link">
-                            <i class="fa-brands fa-firefox"></i> MDN Web Docs <span>web standards</span>
-                        </a>
-                        <a href="https://quickref.me/" target="_blank" class="quick-link">
-                            <i class="fa-solid fa-bolt"></i> QuickRef.ME <span>quick cheat sheets</span>
-                        </a>
-                        <a href="https://www.w3schools.com/" target="_blank" class="quick-link">
-                            <i class="fa-solid fa-graduation-cap"></i> W3Schools <span>web tutorials</span>
-                        </a>
-                        <a href="https://www.geeksforgeeks.org/" target="_blank" class="quick-link">
-                            <i class="fa-solid fa-code"></i> GeeksforGeeks <span>coding portal</span>
-                        </a>
-                        <a href="https://overapi.com/" target="_blank" class="quick-link">
-                            <i class="fa-solid fa-list-check"></i> OverAPI <span>all-in-one cheats</span>
-                        </a>
-                        <a href="https://aspdotnethelp.com/" target="_blank" class="quick-link">
-                            <i class="fa-solid fa-globe"></i> ASP.NET Help <span>.NET solutions</span>
-                        </a>
-                        <a href="https://developer.mozilla.org/en-US/" target="_blank" class="quick-link">
-                            <i class="fa-brands fa-firefox"></i> MDN Web Docs <span>web standards</span>
-                        </a>
-                        <a href="https://quickref.me/" target="_blank" class="quick-link">
-                            <i class="fa-solid fa-bolt"></i> QuickRef.ME <span>quick cheat sheets</span>
-                        </a>
-                        <a href="https://www.w3schools.com/" target="_blank" class="quick-link">
-                            <i class="fa-solid fa-graduation-cap"></i> W3Schools <span>web tutorials</span>
-                        </a>
-                        <a href="https://www.geeksforgeeks.org/" target="_blank" class="quick-link">
-                            <i class="fa-solid fa-code"></i> GeeksforGeeks <span>coding portal</span>
-                        </a>
-                        <a href="https://overapi.com/" target="_blank" class="quick-link">
-                            <i class="fa-solid fa-list-check"></i> OverAPI <span>all-in-one cheats</span>
-                        </a>
+                        <a href="https://aspdotnethelp.com/" target="_blank" class="quick-link"><i class="fa-solid fa-globe"></i> ASP.NET Help <span>.NET solutions</span></a>
+                        <a href="https://developer.mozilla.org/en-US/" target="_blank" class="quick-link"><i class="fa-brands fa-firefox"></i> MDN Web Docs <span>web standards</span></a>
+                        <a href="https://quickref.me/" target="_blank" class="quick-link"><i class="fa-solid fa-bolt"></i> QuickRef.ME <span>quick cheat sheets</span></a>
+                        <a href="https://www.w3schools.com/" target="_blank" class="quick-link"><i class="fa-solid fa-graduation-cap"></i> W3Schools <span>web tutorials</span></a>
+                        <a href="https://www.geeksforgeeks.org/" target="_blank" class="quick-link"><i class="fa-solid fa-code"></i> GeeksforGeeks <span>coding portal</span></a>
+                        <a href="https://overapi.com/" target="_blank" class="quick-link"><i class="fa-solid fa-list-check"></i> OverAPI <span>all-in-one cheats</span></a>
+                        <a href="https://aspdotnethelp.com/" target="_blank" class="quick-link"><i class="fa-solid fa-globe"></i> ASP.NET Help <span>.NET solutions</span></a>
+                        <a href="https://developer.mozilla.org/en-US/" target="_blank" class="quick-link"><i class="fa-brands fa-firefox"></i> MDN Web Docs <span>web standards</span></a>
+                        <a href="https://quickref.me/" target="_blank" class="quick-link"><i class="fa-solid fa-bolt"></i> QuickRef.ME <span>quick cheat sheets</span></a>
+                        <a href="https://www.w3schools.com/" target="_blank" class="quick-link"><i class="fa-solid fa-graduation-cap"></i> W3Schools <span>web tutorials</span></a>
+                        <a href="https://www.geeksforgeeks.org/" target="_blank" class="quick-link"><i class="fa-solid fa-code"></i> GeeksforGeeks <span>coding portal</span></a>
+                        <a href="https://overapi.com/" target="_blank" class="quick-link"><i class="fa-solid fa-list-check"></i> OverAPI <span>all-in-one cheats</span></a>
                     </div>
                 </div>
             </section>
 
             <section class="card">
-                <h3 style="font-family: 'Outfit'; margin-bottom: 20px; font-size: 0.9rem; color: var(--text-dim); letter-spacing: 1px;">LATEST UPDATES</h3>
+                <h3 style="margin-bottom: 20px; font-size: 0.9rem; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase;">LATEST UPDATES</h3>
                 <div class="news-feed">
                  <div class="news-item">
+                    <h4><span class="pulse-dot red-dot"></span>Adaptive Typography Engine</h4>
+                    <p>Portal ab automatically aapke device ke native fonts (Vivo, iOS, Windows) ko apply karta hai, jisse performance aur personalization behtar hoti hai.</p>
+                 </div>
+                 <div class="news-item">
                     <h4><span class="pulse-dot red-dot"></span>Glassmorphism Engine 2.0</h4>
-                    <p>    Improved background blur performance and real-time reflection mapping for window frames.</p>
-                </div>
+                    <p> Improved background blur performance and real-time reflection mapping for window frames.</p>
+                 </div>
                  <div class="news-item">
                     <h4><span class="pulse-dot red-dot"></span>Zero-Latency File Explorer</h4>
-                    <p>    Implementation of an "Instant-Fetch" logic for cloud storage, allowing users to browse remote files as if they were local.</p>
-                </div>
+                    <p> Implementation of an "Instant-Fetch" logic for cloud storage, allowing users to browse remote files as if they were local.</p>
+                 </div>
                  <div class="news-item">
                     <h4><span class="pulse-dot red-dot"></span>Multi-Device Synchronization</h4>
-                    <p>    Real-time state saving. If a user closes a window on their phone, it reflects immediately on the desktop view.</p>
+                    <p> Real-time state saving. If a user closes a window on their phone, it reflects immediately on the desktop view.</p>
                  </div>
                 </div>
             </section>
-
+            
             <section class="card">
-                <h3 style="font-family: 'Outfit'; margin-bottom: 20px; font-size: 0.9rem; color: var(--text-dim); letter-spacing: 1px;">FUTURE ROADMAP</h3>
+    <h3 style="margin-bottom: 20px; font-size: 0.9rem; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase;">FUTURE ROADMAP</h3>
                 <div class="news-feed">
                     <div class="news-item">
                         <h4><span class="pulse-dot green-dot"></span>AI Copilot Integration (Q3 2026)</h4>
-                        <p>    A built-in terminal assistant that can execute cloud commands, organize files, or summarize documents using LLMs.</p>
+                        <p> A built-in terminal assistant that can execute cloud commands, organize files, or summarize documents using LLMs.</p>
                     </div>
                     <div class="news-item">
                         <h4><span class="pulse-dot green-dot"></span>Zero-Trust Security Layer (Q4 2026)</h4>
-                        <p>    Every app execution requires a "Silent Verify" check to ensure the cloud environment hasn't been compromised.</p>
+                        <p> Every app execution requires a "Silent Verify" check to ensure the cloud environment hasn't been compromised.</p>
                     </div>
                     <div class="news-item">
                         <h4><span class="pulse-dot green-dot"></span>Voice-First Interface (2027)</h4>
-                        <p>    Complete hands-free navigation using advanced NLP (Natural Language Processing).</p>
+                        <p> Complete hands-free navigation using advanced NLP (Natural Language Processing).</p>
                     </div>
                 </div>
             </section>
@@ -487,58 +438,44 @@
     </div>
 
     <footer>
-        &copy; 2026 cloud 9 digital - all right reserved.
+        &copy; 2026 cloud 9 digital - all rights reserved.
     </footer>
 
     <script>
-        function openInDrive(id) { 
-            window.open(`https://drive.google.com/open?id=${id}`, '_blank'); 
-        }
-        
+        function openInDrive(id) { window.open(`https://drive.google.com/open?id=${id}`, '_blank'); }
         const _0xk = atob("U05BUFBZX0FETUlOX0FDQ0VTU18yMDI2X1NFQ1JFVA==");
-        
         function checkMaintenance() {
-        
             const params = new URLSearchParams(window.location.search);
             const adminKey = params.get("access");
-        
-            // Admin Bypass 
             if(adminKey === _0xk){
                 document.getElementById('maintenance-screen').style.display = 'none';
                 document.body.style.overflow = 'auto';
                 return;
             }
-        
             const now = new Date();
             const day = now.getDay(); 
-        
-                if (day !== 0) { // Lock Monday-Saturday
-                    document.getElementById('maintenance-screen').style.display = 'flex';
-                    document.body.style.overflow = 'hidden';
-        
-                    const target = new Date();
-                    target.setDate(now.getDate() + (7 - day));
-                    target.setHours(0, 0, 0, 0);
-        
-                    const diff = target - now;
-        
-                    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-                    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-                    const m = Math.floor((diff / (1000 * 60)) % 60);
-                    const s = Math.floor((diff / 1000) % 60);
-        
-                    if(document.getElementById('days')) document.getElementById('days').innerText = String(d).padStart(2, '0');
-                    document.getElementById('hours').innerText = String(h).padStart(2, '0');
-                    document.getElementById('mins').innerText = String(m).padStart(2, '0');
-                    document.getElementById('secs').innerText = String(s).padStart(2, '0');
-                } else {
-                    document.getElementById('maintenance-screen').style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                }
+            if (day !== 0) {
+                document.getElementById('maintenance-screen').style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                const target = new Date();
+                target.setDate(now.getDate() + (7 - day));
+                target.setHours(0, 0, 0, 0);
+                const diff = target - now;
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const m = Math.floor((diff / (1000 * 60)) % 60);
+                const s = Math.floor(diff / 1000 % 60);
+                if(document.getElementById('days')) document.getElementById('days').innerText = String(d).padStart(2, '0');
+                document.getElementById('hours').innerText = String(h).padStart(2, '0');
+                document.getElementById('mins').innerText = String(m).padStart(2, '0');
+                document.getElementById('secs').innerText = String(s).padStart(2, '0');
+            } else {
+                document.getElementById('maintenance-screen').style.display = 'none';
+                document.body.style.overflow = 'auto';
             }
-        
-            setInterval(checkMaintenance, 1000);
-            checkMaintenance();
-        </script>
+        }
+        setInterval(checkMaintenance, 1000);
+        checkMaintenance();
+    </script>
 </body>
 </html>
